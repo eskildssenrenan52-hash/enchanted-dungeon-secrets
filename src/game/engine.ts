@@ -1,3 +1,4 @@
+import { softHole, softGlow } from "@/odyssey/perf";
 import { WorldArt, TREE_TILES } from './world-art';
 import { FRONTIER, FRONTIER_GATES, LEGACY_W, LEGACY_H, type FrontierBiome } from './frontier';
 import { freshSettlement, growPlots, useWorldTool, interactSettlement, renderSettlement, applyStructures, CARPENTRY_RECIPES, type Tool, type CropKind, type StructureKind } from "./settlement";
@@ -1112,9 +1113,7 @@ export class Game {
       l.fillRect(0, 0, this.viewWidth, this.viewHeight);
       l.globalCompositeOperation = "destination-out";
       const hole = (x: number, y: number, r: number, a = 1) => {
-        const g = l.createRadialGradient(x - cx, y - cy, 0, x - cx, y - cy, r);
-        g.addColorStop(0, `rgba(0,0,0,${a})`); g.addColorStop(1, "rgba(0,0,0,0)");
-        l.fillStyle = g; l.fillRect(x - cx - r, y - cy - r, r * 2, r * 2);
+        softHole(l, x - cx, y - cy, r, a);
       };
       hole(p.x, p.y - 8, 70 + Math.sin(wt * 6) * 2);
       const glows: { x: number; y: number; r: number; col: string }[] = [];
@@ -1131,9 +1130,7 @@ export class Game {
       c.drawImage(this.light, 0, 0);
       c.globalCompositeOperation = "lighter";
       for (const g of glows) {
-        const gr = c.createRadialGradient(g.x - cx, g.y - cy, 0, g.x - cx, g.y - cy, g.r);
-        gr.addColorStop(0, g.col); gr.addColorStop(1, "rgba(0,0,0,0)");
-        c.fillStyle = gr; c.fillRect(g.x - cx - g.r, g.y - cy - g.r, g.r * 2, g.r * 2);
+        softGlow(c, g.x - cx, g.y - cy, g.r, g.col);
       }
       c.globalCompositeOperation = "source-over";
     }
