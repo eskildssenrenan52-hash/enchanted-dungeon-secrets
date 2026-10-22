@@ -94,12 +94,14 @@ function Index() {
     const loop = (t: number) => {
       const dt = Math.min(0.05, (t - last) / 1000); last = t;
       g.paused = panelRef.current !== null;
-      g.update(dt); g.render();
+      g.update(dt);
+      if (g.quality.shouldRender()) { const t0 = performance.now(); g.render(); g.quality.sample(performance.now() - t0 + (t - last > 0 ? 0 : 0)); }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
     if (import.meta.env.DEV) (window as unknown as { __game?: unknown }).__game = g;
-    const iv = setInterval(() => setTick((x) => x + 1), 120);
+    // O painel do jogo atualiza menos vezes em aparelhos fracos (a tela do jogo segue fluida).
+    let hud = 0; const iv = setInterval(() => { hud++; if (g.quality.level >= 1 || hud % 2 === 0) setTick((x) => x + 1); }, 120);
     const down = (e: KeyboardEvent) => {
       if (!g.started) return;
       g.audio.init();
