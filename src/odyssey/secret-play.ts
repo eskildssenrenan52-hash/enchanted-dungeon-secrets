@@ -190,3 +190,5 @@ export function secretLights(g: Game, hole: (x: number, y: number, r: number, a?
   const has = (k: string) => g.discoveries.has(k), relic = (id: string) => g.openedChests.has(id);
   for (const r of ALL_REALMS) if (realmOpen(r, has, relic)) { const p = realmPortalPos(g.overworld, r); hole(p.tx * TS + 8, p.ty * TS + 8, 44, 0.9); }
 }
+/** Posição na superfície de uma etapa (usado pelos testes e pela lista de pistas). */
+export const secretSitePos = (g: Game, s: SecretStep) => resolve(g.overworld, s.anchor!, s.dx!, s.dy!);
