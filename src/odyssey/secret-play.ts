@@ -31,7 +31,7 @@ const heartPos = (world: World) => { const k = 'heart'; const hit = posCache.get
 export const realmPortalPos = (world: World, r: RealmDef) => r === HEART_REALM ? heartPos(world) : resolve(world, r.anchor, r.dx, r.dy);
 
 /* ───────────── Etapas ativas (recalculadas só quando o progresso muda) ───────────── */
-interface Active { chain: SecretChain; step: number; tx: number; ty: number; floor?: number }
+interface Active { chain: SecretChain; step: number; tx: number; ty: number; floor?: number | undefined }
 let activeCache: { size: number; list: Active[] } | null = null;
 function actives(g: Game): Active[] {
   if (activeCache && activeCache.size === g.discoveries.size) return activeCache.list;
