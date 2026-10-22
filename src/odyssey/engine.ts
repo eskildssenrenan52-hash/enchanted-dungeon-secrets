@@ -2,6 +2,7 @@ import { WorldArt, TREE_TILES, hasProp } from './world-art';
 import { TEMPLES } from './depths';
 import { ABYSS_ENTRY } from './dungeon';
 import { drawDepthProps } from './depth-props';
+import { drawSecrets, secretLights, isRealm } from './secret-play';
 import { FRONTIER, FRONTIER_GATES, LEGACY_W, LEGACY_H, type FrontierBiome } from './frontier';
 import { createHomeInterior, drawHome, drawFurniture, FURNITURE, freshHome, type FurnitureKind } from "./home";
 import { isPlayerHome, freshSettlement, growPlots, useWorldTool, interactSettlement, renderSettlement, applyStructures, CARPENTRY_RECIPES, type Tool, type CropKind, type StructureKind } from "./settlement";
@@ -100,7 +101,7 @@ export class Game {
   openedChests = new Set<string>();
   transition = 0;
   doorCooldown = 0;
-  get areaName() { if (this.depth) return this.depth.kind === 'abyss' ? `Abismo do Cântico · Andar ${this.depth.floor}` : `${this.depth.temple?.name} · 2º andar`; return this.interior?.name ?? (Math.hypot(this.p.x / TS - 122, this.p.y / TS - 126) < 19 ? 'Vila de Potos' : BIOME_NAMES[this.biome]); }
+  get areaName() { if (this.depth) return this.depth.kind === 'abyss' ? `Abismo do Cântico · Andar ${this.depth.floor}` : isRealm(this.depth.temple) ? `${this.depth.temple?.name} · Reino Oculto` : `${this.depth.temple?.name} · 2º andar`; return this.interior?.name ?? (Math.hypot(this.p.x / TS - 122, this.p.y / TS - 126) < 19 ? 'Vila de Potos' : BIOME_NAMES[this.biome]); }
   get localNpcs(): NpcDef[] {
     if (this.depth) return [];
     if (!this.interior) return NPCS;
@@ -1222,6 +1223,7 @@ export class Game {
         else if(t!==T.WATER&&t!==T.LAVA&&!this.spriteBlocked(tx,ty))draws.push({y:ty*TS+16,f:()=>this.art.prop(c,t,b,tx,ty)});
       }
       if(this.depth)drawDepthProps(this,c,draws,x0,y0,x1,y1,wt);
+      drawSecrets(this,c,draws,x0,y0,x1,y1,wt);
       for(let ty=y0-3;ty<=y1+3;ty++)for(let tx=x0-3;tx<=x1+3;tx++){
         const b=biomeOf(this.world,tx*TS,ty*TS);
         if(b in FRONTIER && tileAt(this.world,tx,ty)===FRONTIER[b as FrontierBiome].obstacle){
@@ -1306,7 +1308,7 @@ export class Game {
         l.fillStyle = g; l.fillRect(x - cx - r, y - cy - r, r * 2, r * 2);
       };
       const glows: { x: number; y: number; r: number; col: string }[] = [];
-      if (this.depth) depthLights(this, hole, glows, wt); else hole(p.x, p.y - 8, 70 + Math.sin(wt * 6) * 2);
+      if (this.depth) depthLights(this, hole, glows, wt); else { hole(p.x, p.y - 8, 70 + Math.sin(wt * 6) * 2); secretLights(this, hole); }
       if (!this.depth) for (let ty = y0; ty <= y1; ty++) for (let tx = x0; tx <= x1; tx++) {
         const t = tileAt(this.world, tx, ty);
         if (t === T.CRYSTAL) { hole(tx * TS + 8, ty * TS + 8, 34, 0.8); glows.push({ x: tx * TS + 8, y: ty * TS + 8, r: 22, col: "rgba(180,100,255,0.35)" }); }

@@ -7,6 +7,12 @@ import { T, TS, W, H, type World } from './world';
 import { cycleBonus } from './story';
 import { drawTreasure } from './scenery';
 import { propAction, propLights } from './depth-props';
+import { secretSurfaceAction, secretDepthAction, secretLights, realmFloor, realmTemple, isRealm, realmDefOf } from './secret-play';
+import type { RealmDef } from './secrets';
+import { ITEMS } from './data';
+import { ALL_REALMS } from './secrets';
+
+for (const [i, r] of ALL_REALMS.entries()) ITEMS[r.relic] ??= { id: r.relic, name: r.relicName, type: 'amulet', bonus: { str: 4 + i * 2, int: 4 + i * 2, vit: 3 + i * 2, hp: 60 + i * 40, mp: 30 + i * 20 }, desc: `Relíquia oculta do ${r.name}.`, color: r.color, price: 2000 + i * 1500 };
 
 export interface DepthState { kind: 'abyss' | 'temple'; floor: number; temple?: Temple; data: DungeonFloor; stair: StairStyle }
 
@@ -80,6 +86,15 @@ export function enterTemple(g: Game, t: Temple) {
   g.toast(t.lore, '#e0c890'); g.save();
 }
 
+/** Entra num Reino Oculto: um bioma secreto com luz própria, inimigos fortes e uma relíquia. */
+export function enterRealm(g: Game, r: RealmDef) {
+  const t = realmTemple(r);
+  enter(g, { kind: 'temple', floor: 1, temple: t, data: realmFloor(r), stair: 'moon' }, 1.5);
+  g.discoveries.add(t.id);
+  g.biomeBanner = { name: `✦ ${r.name} · Reino Oculto · Nv ${r.level}+`, t: 5 };
+  g.toast(r.lore, r.color); g.save();
+}
+
 export function leaveDepth(g: Game, silent = false) {
   if (!g.depth) return;
   g.depth = null; g.world = g.overworld; g.enemies = g.surfaceEnemies; g.surfaceEnemies = [];
@@ -102,6 +117,7 @@ const near = (g: Game, tx: number, ty: number, r = 22) => Math.hypot(g.p.x - tx 
 export function depthAction(g: Game, run: boolean): string {
   const d = g.depth; if (!d) return '';
   const data = d.data;
+  const sec = secretDepthAction(g, run); if (sec) return sec;
   const prop = propAction(g, run); if (prop) return prop;
   for (const c of data.chests) if (near(g, c.tx, c.ty)) { if (run) g.claimChest(c.id, c.gold, c.item, c.qty, 'Baú das profundezas'); return g.openedChests.has(c.id) ? 'Baú vazio' : 'E · Abrir baú'; }
   if (near(g, data.start.tx, data.start.ty, 20)) {
@@ -111,7 +127,8 @@ export function depthAction(g: Game, run: boolean): string {
   if (near(g, data.stairs.tx, data.stairs.ty, 20)) {
     if (d.kind === 'temple') {
       const id = `${d.temple!.id}-relic`;
-      if (run) { if (g.openedChests.has(id)) g.toast('O altar já foi honrado.'); else g.claimChest(id, 120 + d.temple!.level * 30, 'temple_relic', 1, 'Altar do Templo'); }
+      const realm = realmDefOf(d.temple);
+      if (run) { if (g.openedChests.has(id)) g.toast('O altar já foi honrado.'); else if (realm) g.claimChest(id, 500 + realm.level * 60, realm.relic, 1, `Altar do ${realm.name}`); else g.claimChest(id, 120 + d.temple!.level * 30, 'temple_relic', 1, 'Altar do Templo'); }
       return g.openedChests.has(id) ? 'Altar vazio' : 'E · Tocar o altar';
     }
     if (d.floor >= ABYSS_FLOORS) { if (run) leaveDepth(g); return 'E · Retornar à superfície'; }
@@ -126,7 +143,7 @@ export function depthAction(g: Game, run: boolean): string {
 export function surfaceEntrance(g: Game, run: boolean): string {
   if (near(g, ABYSS_DOOR.tx, ABYSS_DOOR.ty, 26)) { if (run) openAbyssGate(g); return 'E · Portão do Abismo do Cântico'; }
   for (const t of TEMPLES) { const d = templeDoor(t); if (near(g, d.tx, d.ty, 24)) { if (run) enterTemple(g, t); return `E · ${t.name}${hasTorch(g) ? '' : ' (requer Tocha)'}`; } }
-  return '';
+  return secretSurfaceAction(g, run, (r) => enterRealm(g, r));
 }
 
 export function drawSurfaceEntrances(g: Game, c: CanvasRenderingContext2D, draws: { y: number; f: () => void }[], x0: number, y0: number, x1: number, y1: number, wt: number) {
@@ -154,5 +171,6 @@ export function depthLights(g: Game, hole: (x: number, y: number, r: number, a?:
   for (const t of d.data.torches) { hole(t.tx * TS + 8, t.ty * TS + 6, 64 + Math.sin(wt * 7 + t.tx) * 3, 0.95); glows.push({ x: t.tx * TS + 8, y: t.ty * TS + 4, r: 34, col: 'rgba(255,140,50,0.32)' }); }
   hole(d.data.start.tx * TS + 8, d.data.start.ty * TS + 8, 30, 0.6);
   propLights(g, hole, glows, wt);
+  secretLights(g, hole);
 }
-export const depthDarkness = (g: Game) => (g.depth?.kind === 'temple' ? 0.95 : 0.9);
+export const depthDarkness = (g: Game) => (isRealm(g.depth?.temple) ? 0.72 : g.depth?.kind === 'temple' ? 0.95 : 0.9);
