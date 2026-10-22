@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ManaRouteImport } from './routes/mana'
+import { Route as OdysseyRouteImport } from './routes/odyssey'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManaRoute = ManaRouteImport.update({
+  id: '/mana',
+  path: '/mana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OdysseyRoute = OdysseyRouteImport.update({
+  id: '/odyssey',
+  path: '/odyssey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mana': typeof ManaRoute
+  '/odyssey': typeof OdysseyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mana': typeof ManaRoute
+  '/odyssey': typeof OdysseyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mana': typeof ManaRoute
+  '/odyssey': typeof OdysseyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/mana' | '/odyssey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/mana' | '/odyssey'
+  id: '__root__' | '/' | '/mana' | '/odyssey'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ManaRoute: typeof ManaRoute
+  OdysseyRoute: typeof OdysseyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mana': {
+      id: '/mana'
+      path: '/mana'
+      fullPath: '/mana'
+      preLoaderRoute: typeof ManaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/odyssey': {
+      id: '/odyssey'
+      path: '/odyssey'
+      fullPath: '/odyssey'
+      preLoaderRoute: typeof OdysseyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ManaRoute: ManaRoute,
+  OdysseyRoute: OdysseyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
