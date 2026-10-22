@@ -8,3 +8,16 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Game architecture
+- Preserve the imported browser Canvas RPG engine and original catalog; settlement mechanics live in a separate module so combat and quests remain compatible.
+- Keep the original browser save key with backward-compatible settlement and terrain fields.
+- Use deterministic world generation for the expanded biome network so saved terrain coordinates remain stable.
+- Match the source game's indexed-access compiler behavior while keeping strict typing enabled; its fixed sprite palettes and tile arrays assume indexed values exist.
+- Render world objects through the browser-only WorldArt module from bundled 8-sprite sheets (128px cells, bottom-aligned) in src/assets/art; tiles drawn as sprites get their biome ground underneath.
+- Dungeon furniture, lore pages and secrets are derived deterministically per floor in src/odyssey/depth-props.ts; read pages and used secrets persist through the existing discoveries/openedChests save sets.
+- Keep legacy generation and treasure coordinates in the original region; generate frontier terrain in lightweight sectors from a separate browser-safe catalog so larger worlds retain save compatibility and fast startup.
+- Size the Canvas camera from its screen bounds and keep controls as accessible overlays; this fills different screen proportions without stretching pixel-art geometry.
+- Generate frontier enemies near exploration rather than allocating a world-wide population; this preserves original quest enemies and bounds combat workload.
+- Two games coexist: Golden Arrow Odyssey lives in `src/odyssey/` (route /odyssey, own save key) and Mana Echoes in `src/game/` (route /mana); `/` is the shared intro/title with accounts. Keeps both games' saves and engines independent.
+- Accounts only store a player profile (username); game progress stays in browser storage, as the user chose.
