@@ -21,3 +21,6 @@
 - Generate frontier enemies near exploration rather than allocating a world-wide population; this preserves original quest enemies and bounds combat workload.
 - Two games coexist: Golden Arrow Odyssey lives in `src/odyssey/` (route /odyssey, own save key) and Mana Echoes in `src/game/` (route /mana); `/` is the shared intro/title with accounts. Keeps both games' saves and engines independent.
 - Accounts only store a player profile (username); game progress stays in browser storage, as the user chose.
+- Secret chains and hidden realms are pure deterministic data in src/odyssey/secrets.ts; runtime hooks live in src/odyssey/secret-play.ts and persist only through existing discoveries/openedChests save sets, keeping old saves compatible.
+- Hidden realms reuse the temple depth state with `realm_`-prefixed pseudo-temples so the engine needs no new depth kind.
+- Lighting uses pre-rendered gradient discs (src/odyssey/perf.ts) and a Quality governor that spaces out heavy full-screen effects on slow devices instead of removing them.

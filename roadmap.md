@@ -26,3 +26,8 @@
 - [x] Objetos de todos os biomas mais bonitos e detalhados.
 - [x] Masmorra mais linda, com segredos e história.
 - [x] Tocha vendida na loja.
+# Segredos do Cântico Oculto + desempenho (out/2026)
+- [x] Trazer o repositório e recriar contas no Lovable Cloud.
+- [x] 300 segredos em 3–6 etapas (runas, noite/dia/chuva, oferendas, enigmas, andares do Abismo).
+- [x] 12 Reinos Ocultos (biomas secretos) + Coração do Cântico Oculto.
+- [x] Luzes pré-renderizadas e qualidade adaptativa para aparelhos fracos.
