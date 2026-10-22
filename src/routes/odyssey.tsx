@@ -95,7 +95,7 @@ function Index() {
       const dt = Math.min(0.05, (t - last) / 1000); last = t;
       g.paused = panelRef.current !== null;
       g.update(dt);
-      if (g.quality.shouldRender()) { const t0 = performance.now(); g.render(); g.quality.sample(performance.now() - t0 + (t - last > 0 ? 0 : 0)); }
+      if (g.quality.shouldRender()) { const t0 = performance.now(); g.render(); g.quality.sample(performance.now() - t0); }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
