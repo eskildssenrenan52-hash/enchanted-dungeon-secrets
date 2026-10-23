@@ -229,6 +229,210 @@ export function drawEnemy(c: Ctx, kind: EnemyKind, x: number, y: number, t: numb
       c.globalAlpha = 1;
       break;
     }
+    case "slime": {
+      const g = tint ?? "#50c050";
+      const sq = Math.round(Math.sin(t * 6) * 2);
+      px(c, -6, -6 + sq, 12, 6 - sq, F(g)); px(c, -4, -8 + sq, 8, 3, F(g));
+      px(c, -3, -5 + sq, 2, 2, "#103010"); px(c, 1, -5 + sq, 2, 2, "#103010");
+      px(c, -2, -7 + sq, 3, 1, F("#a0f0a0"));
+      break;
+    }
+    case "rat": {
+      const f = tint ?? "#8a7a6a";
+      const leg = Math.round(Math.sin(t * 16) * 1);
+      px(c, -7, -6, 12, 5, F(f)); px(c, -6, -2, 2, 2 + leg, F(f)); px(c, 2, -2, 2, 2 - leg, F(f));
+      const hx = fx > 0 ? 5 : -9;
+      px(c, hx, -8, 4, 4, F(f)); px(c, hx + (fx > 0 ? 1 : 2), -10, 2, 2, F("#d0a0a0"));
+      px(c, hx + (fx > 0 ? 3 : 0), -6, 1, 1, "#ff4040");
+      px(c, fx > 0 ? -11 : 5, -4, 4, 1, F("#c09090"));
+      break;
+    }
+    case "bat": {
+      const b = tint ?? "#5a4a7a";
+      const flap = Math.round(Math.sin(t * 12) * 3);
+      px(c, -2, -14 + bob, 4, 5, F(b)); px(c, -1, -16 + bob, 2, 2, F(b));
+      px(c, -9, -15 + bob - flap, 7, 3, F(b)); px(c, 2, -15 + bob - flap, 7, 3, F(b));
+      px(c, -1, -13 + bob, 1, 1, "#ff3030"); px(c, 1, -13 + bob, 1, 1, "#ff3030");
+      break;
+    }
+    case "spider": {
+      const b = tint ?? "#3a2a4a";
+      px(c, -4, -8 + bob, 8, 6, F(b)); px(c, -2, -11 + bob, 4, 3, F(b));
+      for (let i = 0; i < 4; i++) { px(c, -8, -8 + i * 2, 4, 1, F(b)); px(c, 4, -8 + i * 2, 4, 1, F(b)); }
+      px(c, -2, -10 + bob, 1, 1, "#ff2020"); px(c, 1, -10 + bob, 1, 1, "#ff2020");
+      px(c, -1, -13 + bob, 2, 1, F("#e0e0e0"));
+      break;
+    }
+    case "skeleton": {
+      const b = tint ?? "#e0dcd0";
+      px(c, -3, -6, 2, 6, F(b)); px(c, 1, -6, 2, 6, F(b));
+      px(c, -4, -12 + bob, 8, 7, F(b)); px(c, -3, -11 + bob, 6, 1, "#00000040"); px(c, -3, -8 + bob, 6, 1, "#00000040");
+      px(c, -3, -17 + bob, 6, 5, F(b));
+      px(c, -2, -16 + bob, 1, 2, "#202020"); px(c, 1, -16 + bob, 1, 2, "#202020");
+      px(c, 4 * fx, -11 + bob, 2 * fx, 6, F("#b0a890"));
+      break;
+    }
+    case "crow": {
+      const b = tint ?? "#282828";
+      const flap = Math.round(Math.sin(t * 10) * 2);
+      px(c, -4, -10 + bob, 8, 5, F(b)); px(c, -8, -11 + bob - flap, 4, 3, F(b)); px(c, 4, -11 + bob - flap, 4, 3, F(b));
+      const hx = fx > 0 ? 3 : -6;
+      px(c, hx, -13 + bob, 3, 3, F(b)); px(c, hx + (fx > 0 ? 3 : -2), -12 + bob, 2, 1, F("#e0a020"));
+      px(c, hx + 1, -12 + bob, 1, 1, "#ffffff");
+      break;
+    }
+    case "frog": {
+      const g = tint ?? "#40a040";
+      const hop = Math.max(0, Math.round(Math.sin(t * 5) * 2));
+      px(c, -6, -7 - hop, 12, 7, F(g)); px(c, -7, -3, 3, 3, F(g)); px(c, 4, -3, 3, 3, F(g));
+      px(c, -4, -11 - hop, 3, 4, F(g)); px(c, 1, -11 - hop, 3, 4, F(g));
+      px(c, -3, -10 - hop, 1, 1, "#ffd020"); px(c, 2, -10 - hop, 1, 1, "#ffd020");
+      px(c, -2, -4 - hop, 4, 2, F("#c0e080"));
+      break;
+    }
+    case "crab": {
+      const b = tint ?? "#e06050";
+      px(c, -7, -7, 14, 6, F(b)); px(c, -5, -9, 10, 2, F(b));
+      px(c, -11, -8 + bob, 4, 4, F(b)); px(c, 7, -8 + bob, 4, 4, F(b));
+      for (let i = 0; i < 3; i++) { px(c, -9 + i, -2 + i, 1, 2, F(b)); px(c, 8 - i, -2 + i, 1, 2, F(b)); }
+      px(c, -3, -8, 1, 1, "#202020"); px(c, 2, -8, 1, 1, "#202020");
+      break;
+    }
+    case "boar": {
+      const f = tint ?? "#7a5a3a";
+      const leg = Math.round(Math.sin(t * 12) * 1);
+      px(c, -8, -9, 15, 7, F(f)); px(c, -7, -3, 2, 3 + leg, F("#5a4030")); px(c, 3, -3, 2, 3 - leg, F("#5a4030"));
+      const hx = fx > 0 ? 6 : -11;
+      px(c, hx, -10, 5, 5, F(f)); px(c, hx + (fx > 0 ? 4 : -1), -7, 2, 2, F("#e8e0d0"));
+      px(c, hx + (fx > 0 ? 3 : 1), -9, 1, 1, "#ff3030");
+      px(c, -6, -11, 10, 2, F("#5a4030"));
+      break;
+    }
+    case "pixie": {
+      const p = tint ?? "#ff9ae0";
+      const flap = Math.round(Math.sin(t * 14) * 2);
+      c.globalAlpha = 0.6; px(c, -6, -13 + bob - flap, 4, 5, F("#c0e8ff")); px(c, 2, -13 + bob - flap, 4, 5, F("#c0e8ff")); c.globalAlpha = 1;
+      px(c, -2, -12 + bob, 4, 8, F(p)); px(c, -2, -15 + bob, 4, 3, F("#f0d0b0"));
+      px(c, -1, -14 + bob, 1, 1, "#202020"); px(c, 1, -14 + bob, 1, 1, "#202020");
+      px(c, -1, -17 + bob, 2, 2, F("#ffe060"));
+      break;
+    }
+    case "wisp": {
+      const w = tint ?? "#80e0ff";
+      c.globalAlpha = 0.35 + Math.sin(t * 4) * 0.1; px(c, -6, -16 + bob, 12, 13, F(w)); c.globalAlpha = 0.9;
+      px(c, -3, -13 + bob, 6, 8, F(w)); px(c, -2, -15 + bob, 4, 3, F("#e0f8ff"));
+      px(c, -1, -11 + bob, 1, 1, "#103040"); px(c, 1, -11 + bob, 1, 1, "#103040");
+      c.globalAlpha = 1;
+      break;
+    }
+    case "treant": {
+      const b = tint ?? "#6a4a2a";
+      px(c, -5, -6, 4, 6, F(b)); px(c, 1, -6, 4, 6, F(b));
+      px(c, -6, -16 + bob, 12, 11, F(b));
+      px(c, -10, -14 + bob, 4, 3, F(b)); px(c, 6, -14 + bob, 4, 3, F(b));
+      px(c, -7, -22 + bob, 14, 7, F("#3a7a3a")); px(c, -4, -25 + bob, 8, 3, F("#4a8a3a"));
+      px(c, -3, -13 + bob, 2, 2, "#ffd040"); px(c, 1, -13 + bob, 2, 2, "#ffd040");
+      px(c, -1, -10 + bob, 2, 3, "#00000060");
+      break;
+    }
+    case "mummy": {
+      const b = tint ?? "#d8d0b8";
+      px(c, -3, -6, 2, 6, F(b)); px(c, 1, -6, 2, 6, F(b));
+      px(c, -4, -12 + bob, 8, 7, F(b)); px(c, -4, -10 + bob, 8, 1, "#a09878"); px(c, -4, -7 + bob, 8, 1, "#a09878");
+      px(c, -3, -17 + bob, 6, 5, F(b)); px(c, -3, -15 + bob, 6, 1, "#a09878");
+      px(c, -2, -16 + bob, 1, 1, "#60f0ff"); px(c, 1, -16 + bob, 1, 1, "#60f0ff");
+      px(c, -6 * fx, -11 + bob, 3 * fx, 2, F(b));
+      break;
+    }
+    case "gargoyle": {
+      const g = tint ?? "#7a7a8a";
+      px(c, -4, -5, 3, 5, F(g)); px(c, 1, -5, 3, 5, F(g));
+      px(c, -5, -13 + bob, 10, 9, F(g));
+      px(c, -9, -14 + bob, 4, 7, F("#5a5a6a")); px(c, 5, -14 + bob, 4, 7, F("#5a5a6a"));
+      px(c, -3, -17 + bob, 6, 4, F(g)); px(c, -4, -19 + bob, 2, 2, F(g)); px(c, 2, -19 + bob, 2, 2, F(g));
+      px(c, -2, -16 + bob, 1, 1, "#ff8020"); px(c, 1, -16 + bob, 1, 1, "#ff8020");
+      break;
+    }
+    case "serpent": {
+      const s = tint ?? "#c0a050";
+      const w1 = Math.round(Math.sin(t * 8) * 2), w2 = Math.round(Math.sin(t * 8 + 2) * 2);
+      px(c, -8 + w2, -3, 8, 3, F(s)); px(c, -2 + w1, -5, 7, 3, F(s));
+      px(c, 2 * fx, -10 + bob, 5, 6, F(s)); px(c, 3 * fx, -12 + bob, 3, 2, F(s));
+      px(c, 3 * fx, -10 + bob, 1, 1, "#ff3020");
+      px(c, 5 * fx, -8 + bob, 2 * fx, 1, F("#ff6060"));
+      break;
+    }
+    case "beetle": {
+      const b = tint ?? "#3a4a2a";
+      px(c, -6, -8, 12, 7, F(b)); px(c, -5, -9, 10, 2, F("#5a6a3a"));
+      px(c, -1, -8, 2, 7, "#00000050");
+      const hx = fx > 0 ? 5 : -8;
+      px(c, hx, -7, 3, 3, F(b)); px(c, hx + (fx > 0 ? 2 : -1), -10, 1, 3, F("#8a9a5a"));
+      for (let i = 0; i < 3; i++) { px(c, -7, -6 + i * 2, 1, 1, F(b)); px(c, 6, -6 + i * 2, 1, 1, F(b)); }
+      break;
+    }
+    case "jelly": {
+      const j = tint ?? "#c080ff";
+      c.globalAlpha = 0.75;
+      const sq = Math.round(Math.sin(t * 5) * 1);
+      px(c, -5, -16 + bob + sq, 10, 7 - sq, F(j)); px(c, -6, -11 + bob, 12, 2, F(j));
+      for (let i = 0; i < 4; i++) px(c, -5 + i * 3, -9 + bob, 1, 6 + (i % 2) * 2, F(j));
+      px(c, -2, -14 + bob, 1, 1, "#301040"); px(c, 1, -14 + bob, 1, 1, "#301040");
+      c.globalAlpha = 1;
+      break;
+    }
+    case "imp": {
+      const r = tint ?? "#c04030";
+      px(c, -3, -5, 2, 5, F(r)); px(c, 1, -5, 2, 5, F(r));
+      px(c, -4, -11 + bob, 8, 7, F(r));
+      px(c, -3, -15 + bob, 6, 4, F(r)); px(c, -4, -17 + bob, 2, 3, F("#802020")); px(c, 2, -17 + bob, 2, 3, F("#802020"));
+      px(c, -2, -14 + bob, 1, 1, "#ffe040"); px(c, 1, -14 + bob, 1, 1, "#ffe040");
+      px(c, -6 * fx, -8 + bob, 2 * fx, 1, F(r)); px(c, -7 * fx, -9 + bob, 1, 1, F("#802020"));
+      break;
+    }
+    case "salamander": {
+      const s = tint ?? "#e05020";
+      const leg = Math.round(Math.sin(t * 10) * 1);
+      px(c, -8, -6, 14, 5, F(s)); px(c, -7, -2, 2, 2 + leg, F(s)); px(c, 3, -2, 2, 2 - leg, F(s));
+      const hx = fx > 0 ? 5 : -10;
+      px(c, hx, -8, 5, 4, F(s)); px(c, hx + (fx > 0 ? 3 : 1), -7, 1, 1, "#ffe040");
+      px(c, fx > 0 ? -12 : 6, -5, 4, 2, F("#a03010"));
+      px(c, -6, -8, 2, 2, F("#ffb040")); px(c, -1, -8, 2, 2, F("#ffb040")); px(c, 3, -8, 2, 2, F("#ffb040"));
+      break;
+    }
+    case "sprite": {
+      const s = tint ?? "#a0e8ff";
+      px(c, -3, -6, 2, 6, F("#6090b0")); px(c, 1, -6, 2, 6, F("#6090b0"));
+      px(c, -4, -12 + bob, 8, 7, F(s));
+      px(c, -3, -16 + bob, 6, 4, F("#e0f4ff")); px(c, -4, -18 + bob, 3, 2, F(s)); px(c, 1, -18 + bob, 3, 2, F(s));
+      px(c, -2, -15 + bob, 1, 1, "#104060"); px(c, 1, -15 + bob, 1, 1, "#104060");
+      px(c, 4 * fx, -11 + bob, 2 * fx, 5, F("#d0f0ff"));
+      break;
+    }
+    case "wraith": {
+      const w = tint ?? "#4a3a6a";
+      c.globalAlpha = 0.7;
+      px(c, -5, -19 + bob, 10, 12, F(w)); px(c, -7, -15 + bob, 14, 6, F(w));
+      for (let i = 0; i < 5; i++) px(c, -7 + i * 3, -7 + bob + (i % 2), 2, 4, F(w));
+      px(c, -3, -16 + bob, 2, 3, "#a0f0ff"); px(c, 1, -16 + bob, 2, 3, "#a0f0ff");
+      px(c, -1, -11 + bob, 2, 2, "#a0f0ff");
+      c.globalAlpha = 1;
+      break;
+    }
+    case "mimic": {
+      const open = Math.sin(t * 2) > 0.3;
+      px(c, -7, -9, 14, 9, F("#8a5a2a")); px(c, -7, -9, 14, 2, F("#a0703a"));
+      px(c, -1, -9, 2, 9, F("#d0b040"));
+      if (open) {
+        px(c, -7, -13 + bob, 14, 4, F("#a0703a"));
+        px(c, -5, -8, 10, 2, "#401010");
+        px(c, -4, -8, 1, 2, F("#f0e0c0")); px(c, -1, -8, 1, 2, F("#f0e0c0")); px(c, 2, -8, 1, 2, F("#f0e0c0"));
+        px(c, -2, -6, 4, 1, "#ff3040");
+      } else {
+        px(c, -1, -7, 2, 3, F("#f0d060"));
+      }
+      break;
+    }
   }
   c.restore();
 }

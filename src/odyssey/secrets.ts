@@ -36,6 +36,8 @@ export const REALMS: RealmDef[] = [
   { id: 'ruinas_eco', name: 'Ruínas do Primeiro Eco', short: 'Eco', color: '#e8d8b0', lore: 'Aqui a primeira palavra foi dita. As paredes ainda repetem.', floor: T.RUINS, wall: T.WALL, deco: T.PILLAR, biome: 'ruins', enemies: ['golem', 'shade'] },
   { id: 'bosque_lunar', name: 'Bosque da Lua Partida', short: 'Lunar', color: '#c0c8ff', lore: 'Metade da lua caiu aqui. A outra metade ainda procura por ela.', floor: T.AUTUMN, wall: T.CWALL, deco: T.CRYSTAL, biome: 'autumn', enemies: ['wolf', 'shade'] },
   { id: 'abismo_cores', name: 'Abismo das Cores Roubadas', short: 'Cores', color: '#ff80c0', lore: 'Todas as cores que o Silêncio apagou do mundo vieram parar aqui.', floor: T.CAVE, wall: T.CWALL, deco: T.CRYSTAL, biome: 'cave', enemies: ['shade', 'golem', 'sporeling'] },
+  { id: 'jardim_ecos', name: 'Jardim dos Ecos Suspensos', short: 'Ecos', color: '#a0ffc0', lore: 'Cada flor guarda uma frase que alguém não teve coragem de dizer.', floor: T.MOSS, wall: T.PANEL, deco: T.MUSHROOM, biome: 'forest', enemies: ['treant', 'pixie', 'wisp'] },
+  { id: 'mare_sonhos', name: 'Maré dos Sonhos Perdidos', short: 'Sonhos', color: '#80c8ff', lore: 'Os sonhos que as pessoas esqueceram ao acordar boiam aqui, esperando dono.', floor: T.ICE, wall: T.WALL, deco: T.WATER, biome: 'coast', enemies: ['jelly', 'wisp', 'wraith'] },
 ].map((r, i) => ({
   ...r, need: REALM_NEED, level: 18 + i * 9,
   relic: `realm_relic_${r.id}`, relicName: `Relíquia do ${r.short}`,
