@@ -36,6 +36,8 @@ export const REALMS: RealmDef[] = [
   { id: 'ruinas_eco', name: 'Ruínas do Primeiro Eco', short: 'Eco', color: '#e8d8b0', lore: 'Aqui a primeira palavra foi dita. As paredes ainda repetem.', floor: T.RUINS, wall: T.WALL, deco: T.PILLAR, biome: 'ruins', enemies: ['golem', 'shade'] },
   { id: 'bosque_lunar', name: 'Bosque da Lua Partida', short: 'Lunar', color: '#c0c8ff', lore: 'Metade da lua caiu aqui. A outra metade ainda procura por ela.', floor: T.AUTUMN, wall: T.CWALL, deco: T.CRYSTAL, biome: 'autumn', enemies: ['wolf', 'shade'] },
   { id: 'abismo_cores', name: 'Abismo das Cores Roubadas', short: 'Cores', color: '#ff80c0', lore: 'Todas as cores que o Silêncio apagou do mundo vieram parar aqui.', floor: T.CAVE, wall: T.CWALL, deco: T.CRYSTAL, biome: 'cave', enemies: ['shade', 'golem', 'sporeling'] },
+  { id: 'jardim_ecos', name: 'Jardim dos Ecos Suspensos', short: 'Ecos', color: '#a0ffc0', lore: 'Cada flor guarda uma frase que alguém não teve coragem de dizer.', floor: T.MOSS, wall: T.PANEL, deco: T.MUSHROOM, biome: 'forest', enemies: ['treant', 'pixie', 'wisp'] },
+  { id: 'mare_sonhos', name: 'Maré dos Sonhos Perdidos', short: 'Sonhos', color: '#80c8ff', lore: 'Os sonhos que as pessoas esqueceram ao acordar boiam aqui, esperando dono.', floor: T.ICE, wall: T.WALL, deco: T.WATER, biome: 'coast', enemies: ['jelly', 'wisp', 'wraith'] },
 ].map((r, i) => ({
   ...r, need: REALM_NEED, level: 18 + i * 9,
   relic: `realm_relic_${r.id}`, relicName: `Relíquia do ${r.short}`,
@@ -82,6 +84,18 @@ const RIDDLES: Riddle[] = [
   { q: 'Todos me perdem, ninguém me encontra de volta.', options: ['Tempo', 'Chave', 'Juízo'], correct: 0 },
   { q: 'O que o Silêncio come primeiro?', options: ['Canções de ninar', 'Trovões', 'Passos'], correct: 0 },
   { q: 'Quem deixou páginas em cada andar do Abismo?', options: ['A Cantora', 'O homem de manto cinza', 'Kael'], correct: 0 },
+  { q: 'Ando de joelhos e de pé, mas nunca me levanto.', options: ['Escada', 'Caminho', 'Raiz'], correct: 1 },
+  { q: 'Quanto mais de mim existe, menos você enxerga.', options: ['Névoa', 'Escuridão', 'Multidão'], correct: 1 },
+  { q: 'Tenho pescoço, mas não tenho cabeça.', options: ['Garrafa', 'Girafa', 'Camisa'], correct: 0 },
+  { q: 'Nado sem água e canto sem voz, preso no pulso de quem me carrega.', options: ['Relógio', 'Coração', 'Peixe de vidro'], correct: 0 },
+  { q: 'Caio sem nunca ter subido.', options: ['Chuva', 'Noite', 'Neve'], correct: 1 },
+  { q: 'Sou de todos, mas ninguém me pode guardar.', options: ['Amanhã', 'Vento', 'Silêncio'], correct: 0 },
+  { q: 'Qual flor guarda frases não ditas?', options: ['A do Jardim dos Ecos', 'A rosa do deserto', 'A flor da lua'], correct: 0 },
+  { q: 'Onde boiam os sonhos esquecidos?', options: ['No Mar de Vidro', 'Na Maré dos Sonhos', 'No Véu Estelar'], correct: 1 },
+  { q: 'O que a Maré devolve quando a lua está cheia?', options: ['Sonhos', 'Sal', 'Espuma'], correct: 0 },
+  { q: 'Quantos Reinos Ocultos cercam o Coração?', options: ['Doze', 'Catorze', 'Dez'], correct: 1 },
+  { q: 'O que o Baú Falso guarda de verdade?', options: ['Fome', 'Ouro', 'Chaves'], correct: 0 },
+  { q: 'Quem martela o sol todas as manhãs?', options: ['A Forja da Aurora', 'O Colosso', 'Gorm'], correct: 0 },
 ];
 const OFFERS: [string, number][] = [['mana_shard', 1], ['herb', 2], ['wood', 3], ['stone', 3], ['coal', 1], ['potion', 1], ['ether', 1], ['crystal_ore', 1], ['iron_ore', 2], ['hi_potion', 1]];
 const ADJ = ['Sussurrante', 'Partido', 'Esquecido', 'Velado', 'Do Avesso', 'Sem Nome', 'Em Brasa', 'Afogado', 'Dourado', 'Noturno', 'De Cinzas', 'Silente', 'Luminoso', 'Errante', 'Profundo', 'Da Maré', 'Do Orvalho', 'De Vidro', 'Estelar', 'Torto', 'Antigo', 'Dormente', 'Vivo', 'Último', 'Primeiro'];

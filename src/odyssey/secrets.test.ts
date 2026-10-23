@@ -3,11 +3,11 @@ import { SECRETS, REALMS, ALL_REALMS, REALM_NEED, stepOf, stepKey, realmOpen, ch
 import { ITEMS } from './data';
 
 describe('Segredos do Cântico Oculto', () => {
-  it('tem 300 segredos, cada um com 3 a 6 etapas', () => {
-    expect(SECRETS.length).toBe(300);
+  it('tem 350 segredos, cada um com 3 a 6 etapas', () => {
+    expect(SECRETS.length).toBe(350);
     for (const s of SECRETS) { expect(s.steps.length).toBeGreaterThanOrEqual(3); expect(s.steps.length).toBeLessThanOrEqual(6); }
   });
-  it('tem 12 reinos ocultos mais o Coração', () => { expect(REALMS.length).toBe(12); expect(ALL_REALMS.length).toBe(13); });
+  it('tem 14 reinos ocultos mais o Coração', () => { expect(REALMS.length).toBe(14); expect(ALL_REALMS.length).toBe(15); });
   it('a primeira etapa nunca é no Abismo e as oferendas usam itens reais', () => {
     for (const s of SECRETS) {
       expect(s.steps[0]!.kind).not.toBe('depth');
