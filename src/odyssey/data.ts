@@ -94,7 +94,9 @@ export const SPIRITS: SpiritDef[] = [
   { id: "dryad", name: "Dryad", elem: "Cura", spell: "Bênção da Floresta", mp: 14, cd: 1.5, color: "#70ff90", desc: "Restaura HP com base em SAB." },
 ];
 
-export type EnemyKind = "mushroom" | "goblin" | "sporeling" | "scorpion" | "golem" | "wolf" | "shade";
+export type EnemyKind = "mushroom" | "goblin" | "sporeling" | "scorpion" | "golem" | "wolf" | "shade"
+  | "slime" | "rat" | "bat" | "spider" | "skeleton" | "crow" | "frog" | "crab" | "boar" | "pixie" | "wisp"
+  | "treant" | "mummy" | "gargoyle" | "serpent" | "beetle" | "jelly" | "imp" | "salamander" | "sprite" | "wraith" | "mimic";
 export interface EnemyDef { kind: EnemyKind; name: string; hp: number; atk: number; def: number; speed: number; xp: number; gold: number; ranged?: boolean; drops: [string, number][]; size: number }
 export const ENEMIES: Record<EnemyKind, EnemyDef> = {
   mushroom: { kind: "mushroom", name: "Cogumelo", hp: 22, atk: 5, def: 0, speed: 22, xp: 8, gold: 3, drops: [["goo", 0.6], ["herb", 0.2], ["potion", 0.08]], size: 7 },
