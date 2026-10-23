@@ -142,12 +142,12 @@ export const BIOME_NAMES: Record<Biome, string> = {
 };
 export const BIOME_ENEMIES: Record<Biome, EnemyKind[]> = {
   ...Object.fromEntries(Object.entries(FRONTIER).map(([id,d])=>[id,[...d.enemies]])) as Record<FrontierBiome,EnemyKind[]>,
-  autumn: ["goblin", "wolf"], swamp: ["sporeling", "shade"], coast: ["scorpion", "goblin"], jungle: ["sporeling", "goblin"], volcanic: ["golem", "shade"], mushroom: ["mushroom", "sporeling"], meadow: ["mushroom", "goblin"], ruins: ["golem", "shade"],
-  plains: ["mushroom", "mushroom", "goblin"],
-  forest: ["goblin", "sporeling", "sporeling"],
-  desert: ["scorpion", "scorpion", "golem"],
-  cave: ["golem", "shade", "shade"],
-  mountain: ["wolf", "wolf", "golem"],
+  autumn: ["goblin", "wolf", "crow", "boar"], swamp: ["sporeling", "shade", "frog", "wisp", "jelly"], coast: ["scorpion", "goblin", "crab", "serpent", "jelly"], jungle: ["sporeling", "goblin", "treant", "frog", "spider"], volcanic: ["golem", "shade", "imp", "salamander", "beetle"], mushroom: ["mushroom", "sporeling", "pixie", "slime"], meadow: ["mushroom", "goblin", "slime", "boar"], ruins: ["golem", "shade", "skeleton", "gargoyle", "wraith", "mimic"],
+  plains: ["mushroom", "mushroom", "goblin", "slime", "rat"],
+  forest: ["goblin", "sporeling", "sporeling", "spider", "treant", "boar", "pixie"],
+  desert: ["scorpion", "scorpion", "golem", "serpent", "mummy", "beetle"],
+  cave: ["golem", "shade", "shade", "bat", "mimic", "wraith"],
+  mountain: ["wolf", "wolf", "golem", "sprite", "gargoyle"],
 };
 
 export interface BossDef { id: string; name: string; biome: Biome; tx: number; ty: number; hp: number; atk: number; xp: number; gold: number; color: string; minion: EnemyKind; reward: string[]; spirit?: SpiritId }
