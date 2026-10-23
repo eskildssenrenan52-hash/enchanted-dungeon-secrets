@@ -84,6 +84,18 @@ const RIDDLES: Riddle[] = [
   { q: 'Todos me perdem, ninguém me encontra de volta.', options: ['Tempo', 'Chave', 'Juízo'], correct: 0 },
   { q: 'O que o Silêncio come primeiro?', options: ['Canções de ninar', 'Trovões', 'Passos'], correct: 0 },
   { q: 'Quem deixou páginas em cada andar do Abismo?', options: ['A Cantora', 'O homem de manto cinza', 'Kael'], correct: 0 },
+  { q: 'Ando de joelhos e de pé, mas nunca me levanto.', options: ['Escada', 'Caminho', 'Raiz'], correct: 1 },
+  { q: 'Quanto mais de mim existe, menos você enxerga.', options: ['Névoa', 'Escuridão', 'Multidão'], correct: 1 },
+  { q: 'Tenho pescoço, mas não tenho cabeça.', options: ['Garrafa', 'Girafa', 'Camisa'], correct: 0 },
+  { q: 'Nado sem água e canto sem voz, preso no pulso de quem me carrega.', options: ['Relógio', 'Coração', 'Peixe de vidro'], correct: 0 },
+  { q: 'Caio sem nunca ter subido.', options: ['Chuva', 'Noite', 'Neve'], correct: 1 },
+  { q: 'Sou de todos, mas ninguém me pode guardar.', options: ['Amanhã', 'Vento', 'Silêncio'], correct: 0 },
+  { q: 'Qual flor guarda frases não ditas?', options: ['A do Jardim dos Ecos', 'A rosa do deserto', 'A flor da lua'], correct: 0 },
+  { q: 'Onde boiam os sonhos esquecidos?', options: ['No Mar de Vidro', 'Na Maré dos Sonhos', 'No Véu Estelar'], correct: 1 },
+  { q: 'O que a Maré devolve quando a lua está cheia?', options: ['Sonhos', 'Sal', 'Espuma'], correct: 0 },
+  { q: 'Quantos Reinos Ocultos cercam o Coração?', options: ['Doze', 'Catorze', 'Dez'], correct: 1 },
+  { q: 'O que o Baú Falso guarda de verdade?', options: ['Fome', 'Ouro', 'Chaves'], correct: 0 },
+  { q: 'Quem martela o sol todas as manhãs?', options: ['A Forja da Aurora', 'O Colosso', 'Gorm'], correct: 0 },
 ];
 const OFFERS: [string, number][] = [['mana_shard', 1], ['herb', 2], ['wood', 3], ['stone', 3], ['coal', 1], ['potion', 1], ['ether', 1], ['crystal_ore', 1], ['iron_ore', 2], ['hi_potion', 1]];
 const ADJ = ['Sussurrante', 'Partido', 'Esquecido', 'Velado', 'Do Avesso', 'Sem Nome', 'Em Brasa', 'Afogado', 'Dourado', 'Noturno', 'De Cinzas', 'Silente', 'Luminoso', 'Errante', 'Profundo', 'Da Maré', 'Do Orvalho', 'De Vidro', 'Estelar', 'Torto', 'Antigo', 'Dormente', 'Vivo', 'Último', 'Primeiro'];
