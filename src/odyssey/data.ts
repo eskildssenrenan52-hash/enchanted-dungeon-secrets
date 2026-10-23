@@ -127,7 +127,7 @@ export const ENEMIES: Record<EnemyKind, EnemyDef> = {
   salamander: { kind: "salamander", name: "Salamandra de Brasa", hp: 140, atk: 23, def: 5, speed: 38, xp: 58, gold: 21, drops: [["coal", 0.6], ["iron_ore", 0.3], ["elixir", 0.02]], size: 8 },
   sprite: { kind: "sprite", name: "Duende do Gelo", hp: 100, atk: 20, def: 4, speed: 46, xp: 50, gold: 17, ranged: true, drops: [["frost_herb", 0.5], ["mana_shard", 0.3], ["ether", 0.15]], size: 7 },
   wraith: { kind: "wraith", name: "Aparição Lamuriante", hp: 150, atk: 27, def: 5, speed: 36, xp: 72, gold: 28, ranged: true, drops: [["mana_shard", 0.6], ["crystal_ore", 0.25], ["elixir", 0.03]], size: 8 },
-  mimic: { kind: "mimic", name: "Baú Falso", hp: 180, atk: 26, def: 8, speed: 10, xp: 80, gold: 60, drops: [["gold" as never, 0] as never, ["crystal_ore", 0.4], ["hi_potion", 0.3], ["elixir", 0.05]].slice(1) as [string, number][], size: 8 },
+  mimic: { kind: "mimic", name: "Baú Falso", hp: 180, atk: 26, def: 8, speed: 10, xp: 80, gold: 60, drops: [["crystal_ore", 0.4], ["hi_potion", 0.3], ["elixir", 0.05]], size: 8 },
 };
 
 export type Biome = FrontierBiome | "plains" | "forest" | "desert" | "cave" | "mountain" | "autumn" | "swamp" | "coast" | "jungle" | "volcanic" | "mushroom" | "meadow" | "ruins";
