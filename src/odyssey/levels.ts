@@ -8,7 +8,12 @@ export const BIOME_LEVEL: Record<Biome, number> = {
   mangrove: 18, amber: 20, crimson: 21, prism: 23, aurora: 24, spores: 25, marble: 27, thunder: 29, obsidian: 32,
 };
 /** Fixed level bonus of each monster species on top of its biome level. */
-export const MONSTER_LEVEL: Record<EnemyKind, number> = { mushroom: 0, goblin: 1, sporeling: 2, scorpion: 3, wolf: 3, golem: 4, shade: 5 };
+export const MONSTER_LEVEL: Record<EnemyKind, number> = {
+  mushroom: 0, goblin: 1, sporeling: 2, scorpion: 3, wolf: 3, golem: 4, shade: 5,
+  slime: 0, rat: 0, crow: 1, frog: 1, pixie: 2, jelly: 2, spider: 2, boar: 2, crab: 2, bat: 2,
+  wisp: 3, serpent: 3, imp: 3, sprite: 3, beetle: 3, skeleton: 4, mummy: 4, salamander: 4,
+  treant: 5, gargoyle: 5, wraith: 6, mimic: 6,
+};
 
 export const enemyLevel = (biome: Biome, kind: EnemyKind) => BIOME_LEVEL[biome] + MONSTER_LEVEL[kind];
 
