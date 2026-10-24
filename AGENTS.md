@@ -24,3 +24,4 @@
 - Secret chains and hidden realms are pure deterministic data in src/odyssey/secrets.ts; runtime hooks live in src/odyssey/secret-play.ts and persist only through existing discoveries/openedChests save sets, keeping old saves compatible.
 - Hidden realms reuse the temple depth state with `realm_`-prefixed pseudo-temples so the engine needs no new depth kind.
 - Lighting uses pre-rendered gradient discs (src/odyssey/perf.ts) and a Quality governor that spaces out heavy full-screen effects on slow devices instead of removing them.
+- Android packaging uses Capacitor with a separate SPA config (vite.config.android.ts + scripts/postbuild.mjs); never change the main vite.config.ts SSR setup for it. Touch controls must never call setPointerCapture unguarded — it throws on real touch devices.

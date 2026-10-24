@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Golden Arrow Odyssey</string>
+    <string name="title_activity_main">Golden Arrow Odyssey</string>
+    <string name="package_name">com.renan.golden.arrow.odyssey</string>
+    <string name="custom_url_scheme">com.renan.golden.arrow.odyssey</string>
+</resources>
