@@ -19,7 +19,7 @@ export interface RealmDef {
   anchor: number; dx: number; dy: number;
 }
 
-export const SECRETS_PER_CIRCLE = 25;
+export const SECRETS_PER_CIRCLE = 40;
 /** Cadeias concluídas de um círculo necessárias para revelar o portal do Reino Oculto. */
 export const REALM_NEED = 8;
 
@@ -38,6 +38,12 @@ export const REALMS: RealmDef[] = [
   { id: 'abismo_cores', name: 'Abismo das Cores Roubadas', short: 'Cores', color: '#ff80c0', lore: 'Todas as cores que o Silêncio apagou do mundo vieram parar aqui.', floor: T.CAVE, wall: T.CWALL, deco: T.CRYSTAL, biome: 'cave', enemies: ['shade', 'golem', 'sporeling'] },
   { id: 'jardim_ecos', name: 'Jardim dos Ecos Suspensos', short: 'Ecos', color: '#a0ffc0', lore: 'Cada flor guarda uma frase que alguém não teve coragem de dizer.', floor: T.MOSS, wall: T.PANEL, deco: T.MUSHROOM, biome: 'forest', enemies: ['treant', 'pixie', 'wisp'] },
   { id: 'mare_sonhos', name: 'Maré dos Sonhos Perdidos', short: 'Sonhos', color: '#80c8ff', lore: 'Os sonhos que as pessoas esqueceram ao acordar boiam aqui, esperando dono.', floor: T.ICE, wall: T.WALL, deco: T.WATER, biome: 'coast', enemies: ['jelly', 'wisp', 'wraith'] },
+  { id: 'jardim_suspiros', name: 'Jardim dos Suspiros', short: 'Suspiros', color: '#ffd8a0', lore: 'Cada suspiro que o vento esqueceu de levar virou flor. Elas exalam quando você passa.', floor: T.MEADOW, wall: T.PANEL, deco: T.DTREE, biome: 'meadow', enemies: ['treant', 'boar', 'pixie'] },
+  { id: 'farol_abissal', name: 'Farol Abissal', short: 'Farol', color: '#40e0c0', lore: 'Um farol que ilumina para baixo, guiando peixes que nunca viram o céu.', floor: T.MOSS, wall: T.ROCK, deco: T.WATER, biome: 'coast', enemies: ['jelly', 'crab', 'wraith'] },
+  { id: 'colmeia_cristal', name: 'Colmeia de Cristal', short: 'Colmeia', color: '#ffe080', lore: 'Abelhas de cristal guardam aqui o mel das estrelas. Zumbem em dó maior.', floor: T.CAVE, wall: T.CWALL, deco: T.CRYSTAL, biome: 'cave', enemies: ['beetle', 'bat', 'mimic'] },
+  { id: 'deserto_sussurros', name: 'Deserto dos Sussurros', short: 'Sussurros', color: '#f0c890', lore: 'A areia repete tudo o que já foi dito sobre ela. Inclusive os segredos.', floor: T.SAND, wall: T.PILLAR, deco: T.CACTUS, biome: 'desert', enemies: ['serpent', 'mummy', 'imp'] },
+  { id: 'arvoredo_cinzas', name: 'Arvoredo de Cinzas', short: 'Cinzas', color: '#ff9070', lore: 'Árvores que queimam há séculos sem nunca terminar de queimar.', floor: T.ASH, wall: T.ROCK, deco: T.LAVA, biome: 'volcanic', enemies: ['salamander', 'imp', 'gargoyle'] },
+  { id: 'pantano_espelhos', name: 'Pântano dos Espelhos', short: 'Espelhos', color: '#90d8b0', lore: 'Cada poça espelha quem você poderia ter sido. Algumas poças acenam de volta.', floor: T.MOSS, wall: T.CWALL, deco: T.WATER, biome: 'swamp', enemies: ['frog', 'wisp', 'slime'] },
 ].map((r, i) => ({
   ...r, need: REALM_NEED, level: 18 + i * 9,
   relic: `realm_relic_${r.id}`, relicName: `Relíquia do ${r.short}`,
@@ -46,7 +52,7 @@ export const REALMS: RealmDef[] = [
 
 /** O 13º reino: só abre quando as 12 relíquias ocultas foram honradas. */
 export const HEART_REALM: RealmDef = {
-  id: 'coracao_oculto', name: 'Coração do Cântico Oculto', short: 'Coração', color: '#fff0a0', need: 12, level: 140,
+  id: 'coracao_oculto', name: 'Coração do Cântico Oculto', short: 'Coração', color: '#fff0a0', need: 20, level: 140,
   lore: 'Lírien guardou aqui a décima nona nota. Ninguém sabia que existia. Agora você sabe.',
   floor: T.FLOOR, wall: T.CWALL, deco: T.CRYSTAL, biome: 'ruins', enemies: ['shade', 'golem', 'wolf', 'scorpion'],
   relic: 'realm_relic_coracao', relicName: 'Décima Nona Nota', anchor: 0, dx: 0, dy: 0,
@@ -93,9 +99,15 @@ const RIDDLES: Riddle[] = [
   { q: 'Qual flor guarda frases não ditas?', options: ['A do Jardim dos Ecos', 'A rosa do deserto', 'A flor da lua'], correct: 0 },
   { q: 'Onde boiam os sonhos esquecidos?', options: ['No Mar de Vidro', 'Na Maré dos Sonhos', 'No Véu Estelar'], correct: 1 },
   { q: 'O que a Maré devolve quando a lua está cheia?', options: ['Sonhos', 'Sal', 'Espuma'], correct: 0 },
-  { q: 'Quantos Reinos Ocultos cercam o Coração?', options: ['Doze', 'Catorze', 'Dez'], correct: 1 },
+  { q: 'Quantos Reinos Ocultos cercam o Coração?', options: ['Doze', 'Vinte', 'Dez'], correct: 1 },
   { q: 'O que o Baú Falso guarda de verdade?', options: ['Fome', 'Ouro', 'Chaves'], correct: 0 },
   { q: 'Quem martela o sol todas as manhãs?', options: ['A Forja da Aurora', 'O Colosso', 'Gorm'], correct: 0 },
+  { q: 'Qual reino guarda os suspiros que o vento esqueceu?', options: ['O Jardim dos Suspiros', 'O Véu Estelar', 'O Pico do Silêncio'], correct: 0 },
+  { q: 'Para onde o Farol Abissal ilumina?', options: ['Para o céu', 'Para baixo', 'Para dentro'], correct: 1 },
+  { q: 'Em que nota zumbem as abelhas da Colmeia de Cristal?', options: ['Em dó maior', 'Em silêncio', 'Em fá menor'], correct: 0 },
+  { q: 'O que as poças do Pântano dos Espelhos mostram?', options: ['O passado', 'Quem você poderia ter sido', 'O fundo'], correct: 1 },
+  { q: 'Há quanto tempo queimam as árvores do Arvoredo de Cinzas?', options: ['Há séculos, sem terminar', 'Desde ontem', 'Nunca queimaram'], correct: 0 },
+  { q: 'O que a areia do Deserto dos Sussurros repete?', options: ['Passos', 'Tudo que já foi dito sobre ela', 'O vento'], correct: 1 },
 ];
 const OFFERS: [string, number][] = [['mana_shard', 1], ['herb', 2], ['wood', 3], ['stone', 3], ['coal', 1], ['potion', 1], ['ether', 1], ['crystal_ore', 1], ['iron_ore', 2], ['hi_potion', 1]];
 const ADJ = ['Sussurrante', 'Partido', 'Esquecido', 'Velado', 'Do Avesso', 'Sem Nome', 'Em Brasa', 'Afogado', 'Dourado', 'Noturno', 'De Cinzas', 'Silente', 'Luminoso', 'Errante', 'Profundo', 'Da Maré', 'Do Orvalho', 'De Vidro', 'Estelar', 'Torto', 'Antigo', 'Dormente', 'Vivo', 'Último', 'Primeiro'];
