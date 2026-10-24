@@ -31,3 +31,9 @@
 - [x] 300 segredos em 3–6 etapas (runas, noite/dia/chuva, oferendas, enigmas, andares do Abismo).
 - [x] 12 Reinos Ocultos (biomas secretos) + Coração do Cântico Oculto.
 - [x] Luzes pré-renderizadas e qualidade adaptativa para aparelhos fracos.
+# Expansão gigante + mobile (out/2026)
+- [x] Corrigir erro de toque no celular (setPointerCapture sem ponteiro ativo quebrava o direcional).
+- [x] Restaurar empacotamento Android (Capacitor): capacitor.config.ts, vite.config.android.ts, scripts/postbuild.mjs, pasta android/, comandos bun run android:debug/release.
+- [x] 24 missões novas em cadeia para os 6 NPCs novos (pescador, apicultora, coveiro, pastor de tempestades, fungicultora, sábio das dunas).
+- [x] 6 Reinos Ocultos novos (20 no total + Coração) e segredos ampliados de 350 para 800.
+- [x] Tipos limpos, 56 testes passando, build Android gera dist/client/index.html, mobile verificado sem erros.
